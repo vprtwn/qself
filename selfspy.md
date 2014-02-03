@@ -3,18 +3,17 @@ Install command line tools
 ```
 xcode-select --install
 ```
-Clone selfspy
+Clone the repo
 ```
 git clone git://github.com/gurgeh/selfspy
 cd selfspy
 ```
-Install
+Install selfspy
 ```
 sudo easy_install -U pyobjc-core
 sudo python setup.py install
 ```
-Start selfspy automatically on login
+Start selfspy automatically on login. I prefer configuring selfspy to not track my keystrokes when it starts.
 ```
 curl https://raw.github.com/benzguo/qself/master/com.github.selfspy.plist > ~/Library/LaunchAgents/com.github.selfspy.plist
 ```
-You may have to adjust this plist to point to your python location.
