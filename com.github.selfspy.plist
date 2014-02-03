@@ -8,8 +8,7 @@
     <key>ProgramArguments</key>
     <array>
       <string>/usr/bin/python</string>
-      <string>/usr/bin/selfspy</string>
-      <string>-n</string>
+      <string>/usr/local/bin/selfspy</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
