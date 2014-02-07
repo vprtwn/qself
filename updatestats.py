@@ -12,40 +12,51 @@ def main():
     data_dir = '/Users/benguo/.selfspy'
     db_name = os.path.join(data_dir, cfg.DBNAME)
 
-    args = {'data_dir': data_dir,
-            'pactive': None,
-            'pkeys': None,
-            'tactive': None,
-            'tkeys': None,
-            'body': None,
-            'showtext': None,
-            'active': None,
-            'ratios': None,
-            'periods': None,
-            'key_freqs': None,
-            'clicks': None,
-            'date': None,
-            'clock': None,
-            'limit': None,
-            'id': None,
-            'back': None,
-            'process': None,
-            'title': None,
-            'min_keys': None}
+    none_args = ['pactive': None,
+                 'pkeys': None,
+                 'tactive': None,
+                 'tkeys': None,
+                 'body': None,
+                 'showtext': None,
+                 'active': None,
+                 'ratios': None,
+                 'periods': None,
+                 'key_freqs': None,
+                 'clicks': None,
+                 'date': None,
+                 'clock': None,
+                 'limit': None,
+                 'id': None,
+                 'back': None,
+                 'process': None,
+                 'title': None,
+                 'min_keys': None]
 
-    args['pactive'] = ACTIVE_SECONDS
-    # args['clock'] = '00:00'
+    # args['pactive'] = ACTIVE_SECONDS
+    args['title'] = 'Venmo Mail'
+    args['process'] = 'Google Chrome'
+    args['tactive'] = ACTIVE_SECONDS
+    args['clock'] = '00:00'
     stats = Selfstats(db_name, args)
     stats.calc_summary()
 
-    for p in stats.processes.values():
-        p['active_time'] = int(p['activity'].calc_total())
-    raw_pactive_list = stats.processes.items()
-    raw_pactive_list.sort(key=lambda x: x[1]['active_time'], reverse=True)
-    pactive_list = map(lambda x: {x[0]: pretty_seconds(x[1]['active_time'])}, raw_pactive_list)
+    act = stats.summary.get('activity')
+    if act:
+        act = act.calc_total()
+    else:
+        act = 0
+    print 'Total time active:',
+    print pretty_seconds(act)
 
-    pp = pprint.PrettyPrinter(indent=1)
-    pp.pprint(pactive_list)
+
+    # for p in stats.processes.values():
+    #     p['active_time'] = int(p['activity'].calc_total())
+    # raw_pactive_list = stats.processes.items()
+    # raw_pactive_list.sort(key=lambda x: x[1]['active_time'], reverse=True)
+    # pactive_list = map(lambda x: {x[0]: pretty_seconds(x[1]['active_time'])}, raw_pactive_list)
+
+    # pp = pprint.PrettyPrinter(indent=1)
+    # pp.pprint(stats)
 
 
 
