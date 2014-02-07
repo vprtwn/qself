@@ -1,0 +1,3 @@
+[submodule "selfspy"]
+	path = selfspy
+	url = https://github.com/gurgeh/selfspy.git
